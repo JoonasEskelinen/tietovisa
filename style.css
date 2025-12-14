@@ -1,0 +1,216 @@
+html, body { 
+  display: flex; /* Määrittää sivun joustavasti asetelluksi */
+  flex-direction: column; /* elementit pystysuoraan */
+  min-height: 100vh; /* koko selaimen korkeudelle */
+  background: black;
+}
+
+/* Otsikoiden värit ja hehkut */
+.hero-content h1,
+.hero-content h3 {
+  color: #fff;
+  text-shadow:
+    0 0 8px #2e88ff,
+    0 0 16px #2e88ff,
+    0 0 80px rgba(46,136,255,0.8);
+}
+
+/* Pääotsikko */
+.hero-title {
+  font-family: 'Allura', cursive;
+  font-weight: 700;
+  font-size: 130px;
+  margin: 0;
+}
+
+/* Alaotsikko */
+.hero-subtitle {
+  font-family: 'Allura', cursive;
+  font-size: 60px;
+  margin-top: 10px;
+}
+
+/* TIETOVISA- LAATIKOT  */
+.neu-box-visa { 
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px; 
+  box-shadow: 0 0 150px rgba(46,136,255,0.20); 
+  color: #eaeaea; 
+  padding: 1.5rem 3rem; /* vähemmän pystysuuntaista, enemmän vaakasuuntaista tilaa */
+  font-family: 'Poppins', sans-serif;
+  max-width: 700px;
+  margin: 2rem auto; /* keskitetään laatikot ja lisätään väliä muiden laatikoiden väliin */
+  text-align: center;
+}
+
+
+/* Tietovisakysymyksen otsikko */
+.neu-box-visa h4 { 
+  color: #fff; 
+  font-weight: 600; 
+  margin-bottom: 2rem; /* Väli otsikon ja vastausten välille */
+}
+
+/* Jokainen vastausvaihtoehto näkyy labelina */
+.neu-box-visa label { 
+  display: block; /* koko rivin leveys*/
+  text-align: left;
+  padding: 0.6rem 5rem; /* suurennetaan klikkausaluetta */
+  background-color: #222;
+  margin: 8px 0; /* Väliä labeleiden väliin */
+  border-radius: 10px; /* pyöreät kulmat */
+  cursor: pointer; /* muutetaan hiiren kursorin ulkonäköä vastauksen kohdalla */
+}
+
+/* väri radiopainiketta osoittaessa */
+.neu-box-visa label:hover { 
+  background-color: #6e6c6c; 
+}
+
+
+/* Radiopainikkeiden tyyli */
+.neu-box-visa input[type="radio"] { 
+  accent-color: #66ccff; /* Painikkeen valintaväri */
+  margin-right: 10px; /* väli tekstin ja painikkeen väliin */
+  transform: scale(1.2); /* pieni suurennus painikkeelle */
+}
+
+
+
+
+
+/* POKAALIANIMAATIO + VIDEO JOS TÄYDET PISTEET*/
+
+/* youtube videon boxi */
+.winner-video { 
+  position: relative; 
+  padding-bottom: 56.25%; /* kuvasuhde */
+  border-radius: 25px; /* Pyöristetyt kulmat laatikolle */
+  margin: 1.5rem auto; /* Keskittää ja lisää väliä ympärille */
+  max-width: 800px; /* Rajoittaa maksimileveyden */
+}
+
+/* YouTube video*/
+.winner-video iframe { 
+  position: absolute; /* asetetaan boxiin ilman rajoja */
+  top: 0; left: 0; /* kiinnitetään näytön vasempaan yläkulmaan */
+  width: 100%; /* täyttää koko säiliön leveydeltä */
+  height: 100%; /* täyttää koko säiliön korkeudelta */
+  border: none; /* poistaa iframe-reunuksen */
+  border-radius: 25px; /* sama pyöristys kuin boxissa */
+}
+
+/* alue jossa pokaalit putoavat */
+.tausta { 
+  position: fixed !important; /* Asetetaan koko näytön päälle pysyvästi */
+  top: 0; left: 0; /* Kiinnitetään näytön vasempaan yläkulmaan */
+  width: 100vw; /* täyttää koko selaimen leveyden */
+  height: 100vh; /* täyttää koko selaimen korkeuden */
+  pointer-events: none; /* pokaalit eivät tule painikkeiden tielle */
+}
+
+/* yksittäinen pokaali */
+.trophy { 
+  position: absolute; /* koko ruudulle */
+  top: -10%; /* pokaali ei näy ylhäällä rivissä, näkyy vasta kun tippuu */
+  animation-name: fall; /* käyttää alla määriteltyä animaatiota */
+  animation-timing-function: linear; /* tippuu tasaisesti */
+  animation-iteration-count: infinite; /* toistuu loputtomiin */
+  color: #ffd700;
+  z-index: 1; /* Näkyy muiden elementtien päällä, mutta ei videon */
+  will-change: top, transform; /* Selaimelle vihje optimoida animaatio */
+}
+
+/* tippumisanimaatio */
+@keyframes fall { 
+  0%   { top: -10%; transform: rotate(0deg); } /* alussa suorassa */
+  100% { top: 110%; transform: rotate(360deg); } /* pyörii kerran ympäri */
+}
+
+
+/* neu-boxin sisällä olevat lomakkeet */
+.neu-box form { 
+  text-align: center; 
+  margin-top: 1rem; 
+}
+
+
+/* YHTENÄINEN NAPPI */
+
+button,
+.btn { 
+  color: #fff !important; 
+  background: #1a1a1a; 
+  border: none; /* ei erillistä reunaviivaa */
+  border-radius: 25px; /* pyöristetyt kulmat */
+  padding: 0.8rem 1.6rem; /* sisätila napin tekstille */
+  font-weight: bold; /* lihavoitu teksti */
+  cursor: pointer; /* hiiri muuttuu osoittimeksi napin päällä */
+  text-shadow:
+    0 0 8px #2e88ff, /* lähempi hohto */
+    0 0 16px #2e88ff, /* keskihohto */
+    0 0 40px rgba(46,136,255,0.8); /* ulkokehä valo */
+
+  box-shadow: 6px 6px 12px #0e0e0e, -6px -6px 12px #262626;
+}
+
+/* kun hiiri viedään kohdalle */
+button:hover, 
+.btn:hover { 
+  transform: translateY(-3px); 
+  text-shadow:
+    0 0 10px #66aaff, 
+    0 0 25px #2e88ff, 
+    0 0 60px rgba(46,136,255,1); 
+  box-shadow: 12px 12px 20px #2e88ff, -12px -12px 20px #2e88ff;
+  background: #222; 
+}
+
+
+
+/*  säädetään toimimaan kaikilla laitteilla */
+
+@media (max-width: 992px) {
+
+  
+  .hero-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .hero-header {
+    height: 320px;      /* matalampi puhelimella */
+  }
+
+  .hero-title {
+    font-size: 60px;    /* pienemmät fontit */
+  }
+
+  .hero-subtitle {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  
+  .hero-content {
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+  
+  
+  .hero-header {
+    height: 260px;
+
+  }
+
+  .hero-title {
+    font-size: 46px;
+  }
+
+  .hero-subtitle {
+    font-size: 26px;
+  }
+}
