@@ -37,18 +37,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // tarkastetaan pisteet ja tulostetaan viesti pisteiden perusteella
-    if ($pisteet === 10) {
-    $viesti = ""; 
-    } elseif ($pisteet >= 9) {
-    $viesti = "Palkinto oli lähellä, kokeile uudestaan!💪";
-    } else {
-    $viesti = "Voit vielä vähän kertailla tietoja, niin näet palkinnon 😊";
-    }
+        // tarkastetaan pisteet ja tulostetaan viesti pisteiden perusteella
+        if ($pisteet === 10) {
+        $viesti = ""; 
+        } elseif ($pisteet >= 9) {
+        $viesti = "Palkinto oli lähellä, kokeile uudestaan!💪";
+        } else {
+        $viesti = "Voit vielä vähän kertailla tietoja, niin näet palkinnon 😊";
+        }
 
-    // Tallennetaan tulos txt tiedostoon (päivämäärä, nimimerkki ja pisteet)
-    $rivi = date("Y.m.d H:i") . " - " . $nimimerkki . " - " . $pisteet . "/10\n";
-    file_put_contents("tietovisa.txt", $rivi, FILE_APPEND); 
+        $dataKansio = __DIR__ . "/data/";
+        $tiedosto = $dataKansio . "tietovisa.json";
+
+        $uusi = [
+            "aika" => date("Y-m-d H:i"),
+            "nimimerkki" => $nimimerkki,
+            "pisteet" => $pisteet
+        ];
+
+        $nykyinen = [];
+        if (file_exists($tiedosto)) {
+            $nykyinen = json_decode(file_get_contents($tiedosto), true);
+            if (!is_array($nykyinen)) {
+                $nykyinen = [];
+            }
+        }
+
+        $nykyinen[] = $uusi;
+
+        file_put_contents(
+            $tiedosto,
+            json_encode($nykyinen, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE),
+            LOCK_EX
+        );
 
 
     //tulostetaan html näkymä, käytetään php:n heredoc-syntaksia jolla ei tarvitse jokaista echo tulostusta erikseen, vaan tulostetaan koko html sellaisenaan
